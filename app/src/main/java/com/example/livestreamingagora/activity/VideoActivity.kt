@@ -38,13 +38,13 @@ class VideoActivity : AppCompatActivity() {
 
     private var mRtcEngine: RtcEngine? = null
     private var userRole = 1
-    private var title : String? = null
-    private var description : String? = null
-    private var token : String? = null
-    private lateinit var binding : ActivityVideoBinding
-    private lateinit var viewModel :LiveViewModel
-    private lateinit var notificationViewModel :NotificationViewModel
-    private lateinit var loginViewModel :LoginViewModel
+    private var title: String? = null
+    private var description: String? = null
+    private var token: String? = null
+    private lateinit var binding: ActivityVideoBinding
+    private lateinit var viewModel: LiveViewModel
+    private lateinit var notificationViewModel: NotificationViewModel
+    private lateinit var loginViewModel: LoginViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,43 +59,44 @@ class VideoActivity : AppCompatActivity() {
         description = intent.getStringExtra("description")
         initAgoraEngineAndJoinChannel()
 
-        if (!appId.isNullOrEmpty() && !title.isNullOrEmpty() && !description.isNullOrEmpty() && !token.isNullOrEmpty()){
-            val body = LiveBody(appId, title!!, description!!,CHANNEL_NAME, token!!)
+        if (!appId.isNullOrEmpty() && !title.isNullOrEmpty() && !description.isNullOrEmpty() && !token.isNullOrEmpty()) {
+            val body = LiveBody(appId, title!!, description!!, CHANNEL_NAME, token!!)
             verifyLiveUser(body)
 
         }
     }
 
 
-
     private fun verifyLiveUser(body: LiveBody) {
         viewModel.userLive(body, object : LiveRepository.LiveCallBack {
             override fun onResponse(response: LiveResponse?) {
-                Toast.makeText(applicationContext, response?.message ?: null, Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, response?.message ?: null, Toast.LENGTH_SHORT)
+                    .show()
                 sendNotification()
-
             }
-            override fun onFailure(message: String) {
+
+            override fun onFailure(message: String?) {
                 Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
             }
         })
 
     }
-    private fun sendNotification() {
-        notificationViewModel.sendNotification(object : NotificationRepository.NotificationCallBack{
-            override fun onResponse(response: NotificationResponse?) {
-                Toast.makeText(applicationContext, "notification ", Toast.LENGTH_SHORT).show()
-            }
 
-            override fun onFailure(message: String?) {
-                Toast.makeText(applicationContext, "failed", Toast.LENGTH_SHORT).show()
-            }
-        }, NotificationRequest(
-            com.example.livestreamingagora.models.notification.Data(
-                description,
-                title
-            ),"/topics/weather"
-        )
+    private fun sendNotification() {
+        notificationViewModel.sendNotification(
+            object : NotificationRepository.NotificationCallBack {
+                override fun onResponse(response: NotificationResponse?) {
+                    Toast.makeText(applicationContext, "notification ", Toast.LENGTH_SHORT).show()
+                }
+
+                override fun onFailure(message: String?) {
+                    Toast.makeText(applicationContext, "failed", Toast.LENGTH_SHORT).show()
+                }
+            }, NotificationRequest(
+                com.example.livestreamingagora.models.notification.Data(
+                    description, title
+                ), "/topics/weather"
+            )
         )
     }
 
@@ -115,8 +116,7 @@ class VideoActivity : AppCompatActivity() {
         mRtcEngine!!.setClientRole(userRole)
 
         mRtcEngine!!.enableVideo()
-        if (userRole == 1)
-            setupLocalVideo()
+        if (userRole == 1) setupLocalVideo()
         else {
             val localVideoCanvas = findViewById<View>(R.id.local_video_view_container)
             localVideoCanvas.isVisible = false
@@ -168,13 +168,14 @@ class VideoActivity : AppCompatActivity() {
             }
 
             override fun onDeActiveResponse(response: DeActiveResponse?) {
-                Toast.makeText(applicationContext, response?.message ?: null, Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, response?.message ?: null, Toast.LENGTH_SHORT)
+                    .show()
             }
 
-            override fun onFailure(message: String) {
+            override fun onFailure(message: String?) {
                 Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
             }
-        },channelName)
+        }, channelName)
 
         finish()
 
@@ -183,27 +184,30 @@ class VideoActivity : AppCompatActivity() {
 
     fun onLocalAudioMuteClicked(view: View) {
         val iv = view as ImageView
-        if (iv.isSelected){
+        if (iv.isSelected) {
             iv.isSelected = false
             iv.clearColorFilter()
-        }else {
+        } else {
             iv.isSelected = true
             iv.setColorFilter(resources.getColor(R.color.purple_200), PorterDuff.Mode.MULTIPLY)
         }
 
         mRtcEngine!!.muteLocalAudioStream(iv.isSelected)
     }
-    private fun setupLocalVideo(){
+
+    private fun setupLocalVideo() {
         val container = findViewById<View>(R.id.local_video_view_container) as FrameLayout
         val surfaceView = RtcEngine.CreateRendererView(baseContext)
         surfaceView.setZOrderMediaOverlay(true)
         container.addView(surfaceView)
         mRtcEngine!!.setupLocalVideo(VideoCanvas(surfaceView, VideoCanvas.RENDER_MODE_FIT, 0))
     }
-    private fun joinChannel(){
+
+    private fun joinChannel() {
         mRtcEngine!!.joinChannel(token, CHANNEL_NAME, null, 0)
     }
-    private fun setupRemoteVideo(uid: Int){
+
+    private fun setupRemoteVideo(uid: Int) {
         val container = findViewById<View>(R.id.remote_video_view_container) as FrameLayout
         if (container.childCount >= 1) return
         val surfaceView = RtcEngine.CreateRendererView(baseContext)
@@ -211,7 +215,8 @@ class VideoActivity : AppCompatActivity() {
         mRtcEngine!!.setupRemoteVideo(VideoCanvas(surfaceView, VideoCanvas.RENDER_MODE_FIT, uid))
         surfaceView.tag = uid
     }
-    private fun onRemoteUserLeft(){
+
+    private fun onRemoteUserLeft() {
         val container = findViewById<View>(R.id.remote_video_view_container) as FrameLayout
         container.removeAllViews()
     }

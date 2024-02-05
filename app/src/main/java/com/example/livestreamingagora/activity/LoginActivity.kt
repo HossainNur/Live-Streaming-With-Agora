@@ -63,9 +63,10 @@ class LoginActivity : AppCompatActivity() {
 
     private fun verifyUser(body: LoginBody) {
         viewModel.userLogin(body, object : LoginCallBack {
-            override fun onResponse(response: LoginResponse) {
-                setEditor(applicationContext, ACCESS_TOKEN, response.data?.accessToken)
-                Toast.makeText(applicationContext, response.message, Toast.LENGTH_SHORT).show()
+
+            override fun onResponse(response: LoginResponse?) {
+                setEditor(applicationContext, ACCESS_TOKEN, response?.data?.accessToken)
+                Toast.makeText(applicationContext, response?.message ?:null , Toast.LENGTH_SHORT).show()
                 startActivity(Intent(applicationContext,LiveActivity::class.java))
                 finish()
             }
@@ -78,9 +79,10 @@ class LoginActivity : AppCompatActivity() {
                 TODO("Not yet implemented")
             }
 
-            override fun onFailure(message: String) {
+            override fun onFailure(message: String?) {
                 Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
             }
+
         })
 
     }
