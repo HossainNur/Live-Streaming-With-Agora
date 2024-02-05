@@ -64,7 +64,7 @@ class LoginActivity : AppCompatActivity() {
     private fun verifyUser(body: LoginBody) {
         viewModel.userLogin(body, object : LoginCallBack {
             override fun onResponse(response: LoginResponse) {
-                setEditor(applicationContext, ACCESS_TOKEN,response.data.getAccessToken())
+                setEditor(applicationContext, ACCESS_TOKEN, response.data?.accessToken)
                 Toast.makeText(applicationContext, response.message, Toast.LENGTH_SHORT).show()
                 startActivity(Intent(applicationContext,LiveActivity::class.java))
                 finish()

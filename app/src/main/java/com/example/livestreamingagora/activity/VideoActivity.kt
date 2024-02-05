@@ -16,7 +16,6 @@ import com.example.livestreamingagora.R
 import com.example.livestreamingagora.appId
 import com.example.livestreamingagora.databinding.ActivityVideoBinding
 import com.example.livestreamingagora.getSharedPref
-import com.example.livestreamingagora.models.Data
 import com.example.livestreamingagora.models.DeActiveResponse
 import com.example.livestreamingagora.models.LiveBody
 import com.example.livestreamingagora.models.LiveResponse
@@ -61,7 +60,7 @@ class VideoActivity : AppCompatActivity() {
         initAgoraEngineAndJoinChannel()
 
         if (!appId.isNullOrEmpty() && !title.isNullOrEmpty() && !description.isNullOrEmpty() && !token.isNullOrEmpty()){
-            val body = LiveBody(appId,title,description,CHANNEL_NAME,token)
+            val body = LiveBody(appId, title!!, description!!,CHANNEL_NAME, token!!)
             verifyLiveUser(body)
 
         }

@@ -18,7 +18,6 @@ import retrofit2.http.Path;
 
 public interface ApiService {
 
-
    @POST("live-streaming-login")
    Call<LoginResponse> userLogin(@Body LoginBody body);
    @POST("logout")
