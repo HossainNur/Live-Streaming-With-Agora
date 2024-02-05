@@ -63,10 +63,25 @@ class VideoActivity : AppCompatActivity() {
         if (!appId.isNullOrEmpty() && !title.isNullOrEmpty() && !description.isNullOrEmpty() && !token.isNullOrEmpty()){
             val body = LiveBody(appId,title,description,CHANNEL_NAME,token)
             verifyLiveUser(body)
-            sendNotification()
+
         }
     }
 
+
+
+    private fun verifyLiveUser(body: LiveBody) {
+        viewModel.userLive(body, object : LiveRepository.LiveCallBack {
+            override fun onResponse(response: LiveResponse?) {
+                Toast.makeText(applicationContext, response?.message ?: null, Toast.LENGTH_SHORT).show()
+                sendNotification()
+
+            }
+            override fun onFailure(message: String) {
+                Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
+            }
+        })
+
+    }
     private fun sendNotification() {
         notificationViewModel.sendNotification(object : NotificationRepository.NotificationCallBack{
             override fun onResponse(response: NotificationResponse?) {
@@ -83,19 +98,6 @@ class VideoActivity : AppCompatActivity() {
             ),"/topics/weather"
         )
         )
-    }
-
-    private fun verifyLiveUser(body: LiveBody) {
-        viewModel.userLive(body, object : LiveRepository.LiveCallBack {
-            override fun onResponse(response: LiveResponse?) {
-                Toast.makeText(applicationContext, response?.message ?: null, Toast.LENGTH_SHORT).show()
-
-            }
-            override fun onFailure(message: String) {
-                Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
-            }
-        })
-
     }
 
 
