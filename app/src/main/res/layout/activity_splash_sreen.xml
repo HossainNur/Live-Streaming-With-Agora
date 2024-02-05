@@ -10,6 +10,7 @@
     <ImageView
         android:id="@+id/logo_image"
         android:layout_width="140dp"
+
         android:layout_height="140dp"
         android:scaleType="fitXY"
         android:src="@drawable/live_logo_white"
