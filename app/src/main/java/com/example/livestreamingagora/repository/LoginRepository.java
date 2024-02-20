@@ -2,6 +2,7 @@ package com.example.livestreamingagora.repository;
 import android.app.Application;
 import android.util.Log;
 import com.example.livestreamingagora.ConstantsKt;
+import com.example.livestreamingagora.NetworkUtil;
 import com.example.livestreamingagora.models.DeActiveResponse;
 import com.example.livestreamingagora.models.LogoutResponse;
 import com.example.livestreamingagora.network.Api;
@@ -18,14 +19,20 @@ public class LoginRepository {
 
     private ApiService apiService;
     private Application application;
+    private NetworkUtil networkUtil;
     public LoginRepository(Application application) {
         this.application = application;
         apiService = Api.getInstance().getApiService();
+        networkUtil = NetworkUtil.getInstance(application);
     }
 
 
 
     public void userLogin(LoginCallBack callBack, LoginBody body){
+        if (!networkUtil.isNetworkAvailable()) {
+            callBack.onFailure("No internet connection available");
+            return;
+        }
         Call<LoginResponse> call = apiService.userLogin(body);
         call.enqueue(new Callback<LoginResponse>() {
             @Override
@@ -48,6 +55,10 @@ public class LoginRepository {
     }
 
     public void userLogout(LoginCallBack callBack){
+        if (!networkUtil.isNetworkAvailable()) {
+            callBack.onFailure("No internet connection available");
+            return;
+        }
         String token = "Bearer "+ ConstantsKt.getSharedPref(application,ConstantsKt.ACCESS_TOKEN);
         Call<LogoutResponse> call = apiService.userLogout(token);
         call.enqueue(new Callback<LogoutResponse>() {

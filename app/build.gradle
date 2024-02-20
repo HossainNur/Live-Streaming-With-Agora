@@ -53,6 +53,10 @@ dependencies {
 
     implementation "commons-codec:commons-codec:1.9"
 
+    //Toasty dependency
+    //implementation 'com.github.GrenderG:Toasty:1.5.2'
+    //implementation 'com.github.GrenderG:Toasty:1.5.2'
+
 
 
 }

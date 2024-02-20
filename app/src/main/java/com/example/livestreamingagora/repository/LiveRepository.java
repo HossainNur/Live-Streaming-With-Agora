@@ -3,6 +3,7 @@ package com.example.livestreamingagora.repository;
 import android.app.Application;
 import android.util.Log;
 
+import com.example.livestreamingagora.NetworkUtil;
 import com.example.livestreamingagora.models.LiveBody;
 import com.example.livestreamingagora.models.LiveResponse;
 import com.example.livestreamingagora.models.LoginResponse;
@@ -18,13 +19,19 @@ public class LiveRepository {
 
     private ApiService apiService;
     private Application application;
+    private NetworkUtil networkUtil;
 
     public LiveRepository(Application application) {
         this.application = application;
         apiService = Api.getInstance().getApiService();
+        networkUtil = NetworkUtil.getInstance(application);
     }
 
     public void userLive(LiveCallBack callBack, LiveBody body){
+        if (!networkUtil.isNetworkAvailable()) {
+            callBack.onFailure("No internet connection available");
+            return;
+        }
         Call<LiveResponse> call = apiService.userLive(body);
         call.enqueue(new Callback<LiveResponse>() {
             @Override

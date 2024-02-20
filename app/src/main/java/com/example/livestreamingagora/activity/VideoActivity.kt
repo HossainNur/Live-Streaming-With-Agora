@@ -4,6 +4,7 @@ package com.example.livestreamingagora.activity
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.Toast
@@ -51,6 +52,7 @@ class VideoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityVideoBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         token = getSharedPref(applicationContext, AGORA_TOKEN)
         viewModel = ViewModelProvider(this)[LiveViewModel::class.java]
         notificationViewModel = ViewModelProvider(this)[NotificationViewModel::class.java]

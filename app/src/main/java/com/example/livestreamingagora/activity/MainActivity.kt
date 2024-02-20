@@ -9,21 +9,23 @@ import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.example.livestreamingagora.NetworkUtil
 import com.example.livestreamingagora.R
 import com.example.livestreamingagora.databinding.ActivityMainBinding
-import com.example.livestreamingagora.models.LoginBody
 
 class MainActivity : AppCompatActivity() {
 
 
     var userRole = 0
     private lateinit var binding: ActivityMainBinding
+    private var networkUtil: NetworkUtil? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         requestPermission()
+        networkUtil = NetworkUtil.getInstance(applicationContext)
 
         setSupportActionBar(binding.toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
@@ -36,6 +38,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onSubmit(view: View){
+
+        if (!networkUtil?.isNetworkAvailable()!!) {
+            Toast.makeText(applicationContext, "No internet connection available", Toast.LENGTH_SHORT).show()
+            return
+        }
 
 
         val userRadioButton = findViewById<View>(R.id.radio_group) as RadioGroup

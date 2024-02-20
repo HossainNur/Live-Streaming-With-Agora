@@ -10,6 +10,7 @@ import java.util.Base64
 
 val TOKEN = ""
   const val BASE_URL = "https://ott.durbar.live/api/v1/app/"
+  //const val BASE_URL = "http://47.128.146.169/api/v1/app/"
 const val BASE_URL_NOTIFICATION = "https://fcm.googleapis.com/"
 const val SERVICE_KEY_NOTIFICATION = "key=AAAAQZFuQZc:APA91bEH_bFR0bf9OpPwyhRtOAvJ9twhWpTFoLXR6rVfQiyLs_FmkUDjn9DxqJd9hIfN7FE3q7QqSUBb3W1ALL-iUuHJAeliAf5GzAKc_fw36hMoUllPrqawZxEVvonAgoUI41Fxhgpg"
 //const val SERVICE_KEY_NOTIFICATION = "key=AAAAxF-CIzw:APA91bGgY61zvgfdKDv1y7KfLc8MCzyhhu5-6UZM_F2HWsDtabeRxWsgCXbUCACb3p2Dyw1u1zBAQys25hgY44t3lIe-GJ5xaN2noou45PuVMUkSBUWjSbejoiDoKGyRLatgOmub0fWl"
@@ -20,12 +21,12 @@ const val SERVICE_KEY_NOTIFICATION = "key=AAAAQZFuQZc:APA91bEH_bFR0bf9OpPwyhRtOA
 /*val appId = "71e0f92db4ca450c9443831e9d24cb2c"
 val appCertificate = "c58a0a6c8cf2419e886f4075b5e36e7f"
 val channelName = "nur_hossain"*/
-val appId = "71e0f92db4ca450c9443831e9d24cb2c"
-//val appId = "897cde00252a4d88994cf54f6a90e6f4"
-const val CHANNEL_NAME = "durbar"
-//const val CHANNEL_NAME = "nur"
-val appCertificate = "c58a0a6c8cf2419e886f4075b5e36e7f"
-//val appCertificate = "192136d7b6224f40a1f9403a30b14cb4"
+//val appId = "71e0f92db4ca450c9443831e9d24cb2c"
+val appId = "4bce310c35784f5295a782b40fb959be"
+//const val CHANNEL_NAME = "durbar"
+const val CHANNEL_NAME = "bb-production"
+//val appCertificate = "c58a0a6c8cf2419e886f4075b5e36e7f"
+val appCertificate = "6adccc314ab04df2b7e59e408ca76586"
 val uid = 0
 
 const val MY_PREF_NAME = "OTT_SHARED_PREF"

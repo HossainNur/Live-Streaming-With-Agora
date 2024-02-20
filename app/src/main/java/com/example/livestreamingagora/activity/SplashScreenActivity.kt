@@ -17,8 +17,6 @@ class SplashScreenActivity : AppCompatActivity() {
         binding = ActivitySplashSreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-
         val token = getSharedPref(applicationContext, ACCESS_TOKEN)
 
         Handler().postDelayed({

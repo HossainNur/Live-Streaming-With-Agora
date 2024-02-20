@@ -35,6 +35,7 @@ class LoginActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
 
+
         binding.loginBtn.setOnClickListener {
 
             val phone = binding.phoneEdtx.text.toString().trim()
@@ -59,7 +60,6 @@ class LoginActivity : AppCompatActivity() {
 
         }
     }
-
 
     private fun verifyUser(body: LoginBody) {
         viewModel.userLogin(body, object : LoginCallBack {
