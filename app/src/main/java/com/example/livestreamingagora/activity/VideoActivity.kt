@@ -75,7 +75,7 @@ class VideoActivity : AppCompatActivity() {
         viewModel.userLive(body, object : LiveRepository.LiveCallBack {
             override fun onResponse(response: LiveResponse?) {
                 Toast.makeText(applicationContext, response?.message ?: null, Toast.LENGTH_SHORT).show()
-                sendNotification()
+                //sendNotification()
 
             }
             override fun onFailure(message: String) {

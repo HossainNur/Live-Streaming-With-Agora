@@ -59,13 +59,15 @@
 
 
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatButton
             android:layout_width="2dp"
             android:layout_height="30dp"
             android:layout_weight="1"
             android:layout_marginEnd="10dp"
-            android:background="@color/red"
-            android:src="@drawable/baseline_call_end_24"
+            android:background="@android:color/darker_gray"
+            android:text="End"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
             android:onClick="onEndCalledClicked"/>
 
 
