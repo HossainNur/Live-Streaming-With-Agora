@@ -12,6 +12,7 @@ val TOKEN = ""
   const val BASE_URL = "https://ott.durbar.live/api/v1/app/"
 const val BASE_URL_NOTIFICATION = "https://fcm.googleapis.com/"
 const val SERVICE_KEY_NOTIFICATION = "key=AAAAQZFuQZc:APA91bEH_bFR0bf9OpPwyhRtOAvJ9twhWpTFoLXR6rVfQiyLs_FmkUDjn9DxqJd9hIfN7FE3q7QqSUBb3W1ALL-iUuHJAeliAf5GzAKc_fw36hMoUllPrqawZxEVvonAgoUI41Fxhgpg"
+//const val SERVICE_KEY_NOTIFICATION = "key=AAAAxF-CIzw:APA91bGgY61zvgfdKDv1y7KfLc8MCzyhhu5-6UZM_F2HWsDtabeRxWsgCXbUCACb3p2Dyw1u1zBAQys25hgY44t3lIe-GJ5xaN2noou45PuVMUkSBUWjSbejoiDoKGyRLatgOmub0fWl"
 
 //const val BASE_URL = "http://159.223.86.243/api/v1/app/"
 

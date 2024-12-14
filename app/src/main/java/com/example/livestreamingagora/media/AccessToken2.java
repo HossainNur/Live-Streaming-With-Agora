@@ -1,5 +1,7 @@
 package com.example.livestreamingagora.media;
 
+import android.os.Build;
+
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -106,9 +108,11 @@ public class AccessToken2 {
                 .put((short) this.services.size());
         byte[] signing = getSign();
 
-        this.services.forEach((k, v) -> {
-            v.pack(buf);
-        });
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            this.services.forEach((k, v) -> {
+                v.pack(buf);
+            });
+        }
 
         Mac mac = Mac.getInstance("HmacSHA256");
         mac.init(new SecretKeySpec(signing, "HmacSHA256"));

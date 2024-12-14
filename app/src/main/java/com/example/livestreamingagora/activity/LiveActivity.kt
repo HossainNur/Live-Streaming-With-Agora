@@ -57,8 +57,11 @@ class LiveActivity : AppCompatActivity() {
             if (token != null){
 
                 viewModel.userLogout( object : LoginCallBack {
-                    override fun onResponse(response: LoginResponse) {
+
+                    override fun onResponse(response: LoginResponse?) {
+                        TODO("Not yet implemented")
                     }
+
                     override fun onLogoutResponse(response: LogoutResponse?) {
                         Toast.makeText(applicationContext, response!!.message, Toast.LENGTH_SHORT).show()
                         setEditor(applicationContext, ACCESS_TOKEN,null)
@@ -70,9 +73,10 @@ class LiveActivity : AppCompatActivity() {
                         TODO("Not yet implemented")
                     }
 
-                    override fun onFailure(message: String) {
+                    override fun onFailure(message: String?) {
                         Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
                     }
+
                 })
             }
 
